@@ -17,7 +17,11 @@ class Config:
         self._params = config["parameters"]
 
         # Validate required keys
-        missing = [key for key in self.REQUIRED_KEYS if key not in self._params]
+        missing = [
+            key
+            for key in self.REQUIRED_KEYS
+            if key not in self._params or not self._params[key]
+        ]
         if missing:
             raise ValueError(
                 f"Missing required config parameter(s): {', '.join(missing)}"
